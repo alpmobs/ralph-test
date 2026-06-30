@@ -1,0 +1,321 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_homepage_hero_Gw9rby": {
+      "type": "custom-homepage-hero",
+      "blocks": {
+        "slide_79BteR": {
+          "type": "slide",
+          "settings": {
+            "subheading": "New Collection",
+            "title": "Discover Your Style",
+            "description": "Explore our latest collection of premium products",
+            "button_text": "Shop now",
+            "button_link": "",
+            "button_2_text": "Learn more",
+            "button_2_link": ""
+          }
+        },
+        "slide_4NyUhT": {
+          "type": "slide",
+          "settings": {
+            "subheading": "New Collection",
+            "title": "Discover Your Style",
+            "description": "Explore our latest collection of premium products",
+            "button_text": "Shop now",
+            "button_link": "",
+            "button_2_text": "Learn more",
+            "button_2_link": ""
+          }
+        },
+        "slide_A8ainK": {
+          "type": "slide",
+          "settings": {
+            "subheading": "New Collection",
+            "title": "Discover Your Style",
+            "description": "Explore our latest collection of premium products",
+            "button_text": "Shop now",
+            "button_link": "",
+            "button_2_text": "Learn more",
+            "button_2_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_79BteR",
+        "slide_4NyUhT",
+        "slide_A8ainK"
+      ],
+      "name": "Custom homepage hero",
+      "settings": {
+        "slide_height_desktop": 600,
+        "slide_height_mobile": 400,
+        "content_position": "center",
+        "text_alignment": "center",
+        "content_max_width": 800,
+        "overlay_color": "#000000",
+        "overlay_opacity": 0.3,
+        "text_color": "#ffffff",
+        "subheading_size": 16,
+        "title_size": 48,
+        "description_size": 16,
+        "button_background": "#ffffff",
+        "button_text_color": "#000000",
+        "button_hover_background": "#000000",
+        "button_hover_text_color": "#ffffff",
+        "button_2_background": "rgba(0,0,0,0)",
+        "button_2_text_color": "#ffffff",
+        "button_2_hover_background": "#ffffff",
+        "button_2_hover_text_color": "#000000",
+        "button_font_size": 16,
+        "button_border_radius": 8,
+        "autoplay_speed": 5,
+        "dot_size": 10,
+        "dot_color": "#ffffff",
+        "dot_active_color": "#ffffff",
+        "dot_opacity": 0.5
+      }
+    },
+    "custom_homepage_benefits_LVewTa": {
+      "type": "custom-homepage-benefits",
+      "blocks": {
+        "benefit_6kfTMy": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/shield-check.svg",
+            "text": "Rigorous Testing",
+            "description": "Not just power-on. We validate health & performance."
+          }
+        },
+        "benefit_tbtg9e": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/shield-check.svg",
+            "text": "Industry-Leading Packaging",
+            "description": "Designed for high-value I.T. Arrives safe, every time"
+          }
+        },
+        "benefit_Nn7ENa": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/shield-check.svg",
+            "text": "Free 2-Day Shipping",
+            "description": "Domestic stock. Fast delivery for critical needs."
+          }
+        },
+        "benefit_ctdypG": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/shield-check.svg",
+            "text": "Real In-House Support",
+            "description": "Talk to experts who understand the hardware."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_6kfTMy",
+        "benefit_tbtg9e",
+        "benefit_Nn7ENa",
+        "benefit_ctdypG"
+      ],
+      "name": "Custom homepage benefits",
+      "settings": {
+        "desktop_width_percent": 100,
+        "items_per_row_desktop": "4",
+        "text_alignment": "center",
+        "gap": 20,
+        "icon_text_gap": 10,
+        "background_color": "#dddddd",
+        "text_color": "#000000",
+        "text_size": 14,
+        "description_color": "#666666",
+        "description_size": 12,
+        "icon_size": 32,
+        "padding_vertical": 40,
+        "padding_horizontal": 40,
+        "border_radius": 0
+      }
+    },
+    "custom_homepage_featured_products_Fde8EE": {
+      "type": "custom-homepage-featured-products",
+      "name": "Custom featured products",
+      "settings": {
+        "subheading": "Shop now",
+        "heading": "Featured products",
+        "description": "<p>Discover our handpicked selection of premium products</p>",
+        "product_list": [
+          "product-1",
+          "test-3"
+        ],
+        "products_to_show": 4,
+        "desktop_width_percent": 100,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "grid_gap": 20,
+        "grid_spacing": 40,
+        "section_padding": 40,
+        "heading_alignment": "center",
+        "subheading_size": 14,
+        "heading_size": 32,
+        "description_size": 16,
+        "heading_spacing": 20,
+        "subheading_color": "#666666",
+        "heading_color": "#000000",
+        "description_color": "#666666",
+        "card_background": "#ffffff",
+        "card_border_color": "#e5e5e5",
+        "card_border_width": 1,
+        "card_border_radius": 8,
+        "card_padding": 16,
+        "show_vendor": false,
+        "show_price": true,
+        "show_badges": true,
+        "product_title_size": 16,
+        "price_size": 16,
+        "background_color": "#f9f9f9",
+        "product_title_color": "#000000",
+        "vendor_color": "#666666",
+        "price_color": "#000000",
+        "compare_price_color": "#999999",
+        "badge_background": "#000000",
+        "badge_text_color": "#ffffff",
+        "badge_border_radius": 4
+      }
+    },
+    "custom_homepage_collections_DtHKyw": {
+      "type": "custom-homepage-collections",
+      "name": "Custom collections",
+      "settings": {
+        "collections": [
+          "sale",
+          "headgear"
+        ],
+        "heading": "Shop by collection",
+        "subheading": "",
+        "description": "",
+        "heading_alignment": "center",
+        "heading_size": 32,
+        "subheading_size": 18,
+        "description_size": 16,
+        "heading_spacing": 40,
+        "heading_color": "#000000",
+        "subheading_color": "#666666",
+        "description_color": "#666666",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "grid_gap": 20,
+        "desktop_width_percent": 100,
+        "section_padding": 40,
+        "image_aspect_ratio": 100,
+        "card_border_radius": 8,
+        "card_padding": 20,
+        "card_background": "#ffffff",
+        "overlay_opacity": 0.3,
+        "card_title_size": 18,
+        "card_title_color": "#000000",
+        "show_product_count": true,
+        "card_count_size": 12,
+        "count_background": "#ffffff",
+        "count_text_color": "#000000",
+        "count_border_radius": 20,
+        "show_preview_items": true,
+        "preview_items_count": 3,
+        "preview_border_radius": 4
+      }
+    },
+    "custom_homepage_reviews_K6WzqQ": {
+      "type": "custom-homepage-reviews",
+      "blocks": {
+        "review_Rey9gf": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Sarah Johnson",
+            "rating": 5,
+            "review_text": "Absolutely love this product! The quality exceeded my expectations and it arrived quickly.",
+            "product": ""
+          }
+        },
+        "review_xacXXB": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Michael Chen",
+            "rating": 5,
+            "review_text": "Great customer service and fast shipping. The product works exactly as described. Very satisfied!",
+            "product": ""
+          }
+        },
+        "review_QbqjKi": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Emma Williams",
+            "rating": 5,
+            "review_text": "Best purchase I've made this year. Highly recommend to anyone looking for quality and value.",
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_Rey9gf",
+        "review_xacXXB",
+        "review_QbqjKi"
+      ],
+      "name": "Custom homepage reviews",
+      "settings": {
+        "subheading": "Testimonials",
+        "subheading_size": 14,
+        "subheading_color": "#666666",
+        "section_title": "What our customers say",
+        "title_size": 32,
+        "title_color": "#000000",
+        "description": "<p>Hear from our happy customers about their experience with our products.</p>",
+        "description_size": 16,
+        "description_color": "#666666",
+        "title_alignment": "center",
+        "title_spacing": 40,
+        "section_padding": 40,
+        "background_color": "#f9f9f9",
+        "desktop_width_percent": 100,
+        "card_spacing": 20,
+        "show_nav_buttons": true,
+        "enable_autoplay": false,
+        "autoplay_speed": 3000,
+        "card_background": "#ffffff",
+        "card_border_color": "#e0e0e0",
+        "card_border_width": 1,
+        "card_border_radius": 8,
+        "card_padding": 25,
+        "reviewer_image_size": 50,
+        "reviewer_name_size": 16,
+        "star_size": 16,
+        "star_color": "#ffc107",
+        "star_empty_color": "#e0e0e0",
+        "review_text_size": 14,
+        "text_color": "#333333",
+        "button_text": "View all reviews",
+        "button_link": "",
+        "button_alignment": "center",
+        "button_spacing": 30,
+        "button_text_size": 14,
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#333333",
+        "button_border_radius": 14
+      }
+    }
+  },
+  "order": [
+    "custom_homepage_hero_Gw9rby",
+    "custom_homepage_benefits_LVewTa",
+    "custom_homepage_featured_products_Fde8EE",
+    "custom_homepage_collections_DtHKyw",
+    "custom_homepage_reviews_K6WzqQ"
+  ]
+}
