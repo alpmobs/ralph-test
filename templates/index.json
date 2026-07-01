@@ -15,11 +15,12 @@
         "slide_79BteR": {
           "type": "slide",
           "settings": {
-            "subheading": "New Collection",
-            "title": "Discover Your Style",
-            "description": "Explore our latest collection of premium products",
-            "button_text": "Shop now",
-            "button_link": "",
+            "image_desktop": "shopify://shop_images/pexels-pixel-krd-10352379.jpg",
+            "subheading": "Certified Enterprise Server Parts",
+            "title": "Don't Play Roulette With Your Data",
+            "description": "We're the final clean link between enterprise decommissioning and your business. Every drive is rigorously tested, securely packaged, and backed by real support.",
+            "button_text": "Shop Certified Drives",
+            "button_link": "shopify://collections/all",
             "button_2_text": "Learn more",
             "button_2_link": ""
           }
@@ -58,8 +59,8 @@
       "settings": {
         "slide_height_desktop": 600,
         "slide_height_mobile": 400,
-        "content_position": "center",
-        "text_alignment": "center",
+        "content_position": "bottom-left",
+        "text_alignment": "left",
         "content_max_width": 800,
         "overlay_color": "#000000",
         "overlay_opacity": 0.3,
@@ -140,7 +141,6 @@
         "description_size": 12,
         "icon_size": 32,
         "padding_vertical": 40,
-        "padding_horizontal": 40,
         "border_radius": 0
       }
     },
@@ -153,7 +153,10 @@
         "description": "<p>Discover our handpicked selection of premium products</p>",
         "product_list": [
           "product-1",
-          "test-3"
+          "test-3",
+          "echopulse-fitband-5",
+          "lumara-smartcam-360",
+          "test-2"
         ],
         "products_to_show": 4,
         "desktop_width_percent": 100,
@@ -161,7 +164,7 @@
         "columns_mobile": "2",
         "grid_gap": 20,
         "grid_spacing": 40,
-        "section_padding": 40,
+        "section_padding": 75,
         "heading_alignment": "center",
         "subheading_size": 14,
         "heading_size": 32,
@@ -175,7 +178,7 @@
         "card_border_width": 1,
         "card_border_radius": 8,
         "card_padding": 16,
-        "show_vendor": false,
+        "show_vendor": true,
         "show_price": true,
         "show_badges": true,
         "product_title_size": 16,
@@ -187,40 +190,101 @@
         "compare_price_color": "#999999",
         "badge_background": "#000000",
         "badge_text_color": "#ffffff",
-        "badge_border_radius": 4
+        "badge_border_radius": 4,
+        "button_text": "View all",
+        "button_link": "",
+        "button_alignment": "center",
+        "button_spacing": 30,
+        "button_text_size": 14,
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#333333",
+        "button_hover_text_color": "#ffffff",
+        "button_border_radius": 14
       }
     },
     "custom_homepage_collections_DtHKyw": {
       "type": "custom-homepage-collections",
+      "blocks": {
+        "manual_card_TM8iVV": {
+          "type": "manual_card",
+          "settings": {
+            "title": "Collection title",
+            "description": "<p>Add a short collection description here.</p>",
+            "button_text": "Explore collection",
+            "link": ""
+          }
+        },
+        "manual_card_MJAHbU": {
+          "type": "manual_card",
+          "settings": {
+            "image": "shopify://shop_images/album-sale.webp",
+            "title": "Sale",
+            "description": "<p>Add a short collection description here.</p>",
+            "button_text": "Explore collection",
+            "link": "shopify://collections/sale"
+          }
+        },
+        "manual_card_4VmFNM": {
+          "type": "manual_card",
+          "settings": {
+            "title": "Collection title",
+            "description": "<p>Add a short collection description here.</p>",
+            "button_text": "Explore collection",
+            "link": ""
+          }
+        },
+        "manual_card_iMezGw": {
+          "type": "manual_card",
+          "settings": {
+            "title": "Collection title",
+            "description": "<p>Add a short collection description here.</p>",
+            "button_text": "Explore collection",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "manual_card_TM8iVV",
+        "manual_card_MJAHbU",
+        "manual_card_4VmFNM",
+        "manual_card_iMezGw"
+      ],
       "name": "Custom collections",
       "settings": {
-        "collections": [
-          "sale",
-          "headgear"
-        ],
+        "collections": [],
+        "layout_mode": "slider",
+        "show_arrows": true,
         "heading": "Shop by collection",
-        "subheading": "",
-        "description": "",
+        "subheading": "test",
+        "description": "<p>hahaha</p>",
         "heading_alignment": "center",
         "heading_size": 32,
         "subheading_size": 18,
         "description_size": 16,
-        "heading_spacing": 40,
+        "heading_spacing": 75,
         "heading_color": "#000000",
         "subheading_color": "#666666",
         "description_color": "#666666",
-        "columns_desktop": 3,
+        "columns_desktop": 2,
         "columns_mobile": "1",
         "grid_gap": 20,
         "desktop_width_percent": 100,
         "section_padding": 40,
+        "container_background_color": "#ebebeb",
         "image_aspect_ratio": 100,
         "card_border_radius": 8,
         "card_padding": 20,
         "card_background": "#ffffff",
         "overlay_opacity": 0.3,
+        "show_card_description": true,
+        "card_description_words": 18,
         "card_title_size": 18,
         "card_title_color": "#000000",
+        "card_description_size": 14,
+        "card_description_color": "#666666",
+        "show_card_button": true,
+        "collection_button_text": "View",
         "show_product_count": true,
         "card_count_size": 12,
         "count_background": "#ffffff",
@@ -228,18 +292,51 @@
         "count_border_radius": 20,
         "show_preview_items": true,
         "preview_items_count": 3,
-        "preview_border_radius": 4
+        "preview_border_radius": 4,
+        "button_text_size": 14,
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#333333",
+        "button_hover_text_color": "#ffffff",
+        "button_border_radius": 14,
+        "show_section_button": false,
+        "section_button_text": "View all collections",
+        "section_button_link": "",
+        "section_button_alignment": "center",
+        "section_button_spacing": 30
       }
     },
     "custom_homepage_reviews_K6WzqQ": {
       "type": "custom-homepage-reviews",
       "blocks": {
+        "review_HwKQxq": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Sarah Johnson",
+            "rating": 5,
+            "review_text": "Absolutely love this product! The quality exceeded my expectations and it arrived quickly.",
+            "show_product_reference": false,
+            "product": ""
+          }
+        },
+        "review_9YnThd": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Sarah Johnson",
+            "reviewer_image": "shopify://shop_images/christopher-campbell-rDEOVtE7vOs-unsplash.jpg",
+            "rating": 5,
+            "review_text": "Absolutely love this product! The quality exceeded my expectations and it arrived quickly.",
+            "show_product_reference": true,
+            "product": "test-3"
+          }
+        },
         "review_Rey9gf": {
           "type": "review",
           "settings": {
             "reviewer_name": "Sarah Johnson",
             "rating": 5,
             "review_text": "Absolutely love this product! The quality exceeded my expectations and it arrived quickly.",
+            "show_product_reference": false,
             "product": ""
           }
         },
@@ -249,6 +346,7 @@
             "reviewer_name": "Michael Chen",
             "rating": 5,
             "review_text": "Great customer service and fast shipping. The product works exactly as described. Very satisfied!",
+            "show_product_reference": false,
             "product": ""
           }
         },
@@ -258,11 +356,14 @@
             "reviewer_name": "Emma Williams",
             "rating": 5,
             "review_text": "Best purchase I've made this year. Highly recommend to anyone looking for quality and value.",
+            "show_product_reference": false,
             "product": ""
           }
         }
       },
       "block_order": [
+        "review_HwKQxq",
+        "review_9YnThd",
         "review_Rey9gf",
         "review_xacXXB",
         "review_QbqjKi"
@@ -281,11 +382,12 @@
         "title_alignment": "center",
         "title_spacing": 40,
         "section_padding": 40,
-        "background_color": "#f9f9f9",
+        "background_color": "#34E897",
+        "container_background_color": "#EBEBEB",
         "desktop_width_percent": 100,
         "card_spacing": 20,
-        "show_nav_buttons": true,
-        "enable_autoplay": false,
+        "show_nav_buttons": false,
+        "enable_autoplay": true,
         "autoplay_speed": 3000,
         "card_background": "#ffffff",
         "card_border_color": "#e0e0e0",

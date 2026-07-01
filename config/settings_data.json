@@ -110,7 +110,7 @@
     }
   },
   "presets": {
-    "Horizon": {
+    "Exam Ralph": {
       "page_background_color": "{{ settings.color_palette.background }}",
       "page_text_color": "{{ settings.color_palette.foreground }}",
       "badge_sale_background_color": "{{ settings.color_palette.background }}",

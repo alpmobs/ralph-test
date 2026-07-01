@@ -8,6 +8,8 @@
 
 {% style %}
   .custom-reviews--{{ section.id }} {
+    --custom-reviews-page-margin: 16px;
+    background-color: {{ section.settings.container_background_color }};
     display: block;
     width: {{ section.settings.desktop_width_percent }}%;
     max-width: 100%;
@@ -16,9 +18,16 @@
   }
 
   .custom-reviews--{{ section.id }} .custom-reviews__container {
-    max-width: 1200px;
+    width: 100%;
+    max-width: min(var(--normal-page-width), calc(100% - (var(--custom-reviews-page-margin) * 2)));
     margin: 0 auto;
-    padding: 0 20px;
+    
+  }
+
+  @media screen and (min-width: 750px) {
+    .custom-reviews--{{ section.id }} {
+      --custom-reviews-page-margin: 40px;
+    }
   }
 
   .custom-reviews--{{ section.id }} .custom-reviews__header {
@@ -31,6 +40,8 @@
     color: {{ section.settings.subheading_color }};
     margin: 0 0 8px;
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 
   .custom-reviews--{{ section.id }} .custom-reviews__title {
@@ -158,11 +169,17 @@
   }
 
   .custom-reviews--{{ section.id }} .custom-reviews__product {
+    display: block;
+    padding-top: 12px;
+    border-top: 1px solid {{ section.settings.card_border_color }};
+  }
+
+  .custom-reviews--{{ section.id }} .custom-reviews__product-link {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding-top: 12px;
-    border-top: 1px solid {{ section.settings.card_border_color }};
+    text-decoration: none;
+    color: inherit;
   }
 
   .custom-reviews--{{ section.id }} .custom-reviews__product-image {
@@ -177,12 +194,18 @@
     font-size: 14px;
     font-weight: 500;
     color: {{ section.settings.text_color }};
-    margin: 0;
-    text-decoration: none;
+    margin: 0 0 4px;
   }
 
-  .custom-reviews--{{ section.id }} .custom-reviews__product-title:hover {
+  .custom-reviews--{{ section.id }} .custom-reviews__product-link:hover .custom-reviews__product-title {
     text-decoration: underline;
+  }
+
+  .custom-reviews--{{ section.id }} .custom-reviews__product-price {
+    font-size: 13px;
+    color: {{ section.settings.text_color }};
+    margin: 0;
+    opacity: 0.85;
   }
 
   .custom-reviews--{{ section.id }} .custom-reviews__nav {
@@ -371,23 +394,24 @@
               <p class="custom-reviews__text">{{ block.settings.review_text }}</p>
             {% endif %}
 
-            {% if block.settings.product != blank %}
+            {% if block.settings.show_product_reference and block.settings.product != blank %}
               <div class="custom-reviews__product">
-                {% if block.settings.product.featured_image %}
-                  <img
-                    src="{{ block.settings.product.featured_image | image_url: width: 100 }}"
-                    alt="{{ block.settings.product.title | escape }}"
-                    class="custom-reviews__product-image"
-                    loading="lazy"
-                    width="100"
-                    height="100"
-                  >
-                {% endif %}
-                <div class="custom-reviews__product-info">
-                  <a href="{{ block.settings.product.url }}" class="custom-reviews__product-title">
-                    {{ block.settings.product.title }}
-                  </a>
-                </div>
+                <a href="{{ block.settings.product.url }}" class="custom-reviews__product-link">
+                  {% if block.settings.product.featured_image %}
+                    <img
+                      src="{{ block.settings.product.featured_image | image_url: width: 100 }}"
+                      alt="{{ block.settings.product.title | escape }}"
+                      class="custom-reviews__product-image"
+                      loading="lazy"
+                      width="100"
+                      height="100"
+                    >
+                  {% endif %}
+                  <div class="custom-reviews__product-info">
+                    <p class="custom-reviews__product-title">{{ block.settings.product.title }}</p>
+                    <p class="custom-reviews__product-price">{{ block.settings.product.price | money }}</p>
+                  </div>
+                </a>
               </div>
             {% endif %}
           </div>
@@ -723,6 +747,12 @@
       "default": "#f9f9f9"
     },
     {
+      "type": "color",
+      "id": "container_background_color",
+      "label": "Container background",
+      "default": "#ffffff"
+    },
+    {
       "type": "range",
       "id": "desktop_width_percent",
       "label": "Desktop width",
@@ -993,6 +1023,12 @@
           "id": "review_text",
           "label": "Review text",
           "default": "Absolutely love this product! The quality exceeded my expectations and it arrived quickly."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_reference",
+          "label": "Show product reference",
+          "default": false
         },
         {
           "type": "product",

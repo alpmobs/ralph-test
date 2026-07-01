@@ -4,11 +4,12 @@
 
 {% style %}
   .custom-benefits--{{ section.id }} {
+    --custom-benefits-page-margin: 16px;
     display: block;
     width: {{ section.settings.desktop_width_percent }}%;
     max-width: 100%;
     background-color: {{ section.settings.background_color }};
-    padding: {{ section.settings.padding_vertical }}px {{ section.settings.padding_horizontal }}px;
+    padding: {{ section.settings.padding_vertical }}px 0;
     border-radius: {{ section.settings.border_radius }}px;
   }
 
@@ -18,6 +19,15 @@
     gap: {{ section.settings.gap }}px;
     align-items: center;
     justify-items: center;
+    width: 100%;
+    max-width: min(var(--normal-page-width), calc(100% - (var(--custom-benefits-page-margin) * 2)));
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 750px) {
+    .custom-benefits--{{ section.id }} {
+      --custom-benefits-page-margin: 40px;
+    }
   }
 
   .custom-benefits--{{ section.id }} .custom-benefits__item {
@@ -376,16 +386,6 @@
       "type": "range",
       "id": "padding_vertical",
       "label": "Vertical padding",
-      "min": 10,
-      "max": 50,
-      "step": 5,
-      "unit": "px",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "padding_horizontal",
-      "label": "Horizontal padding",
       "min": 10,
       "max": 50,
       "step": 5,

@@ -1,5 +1,11 @@
+{% liquid
+  assign displayed_products = section.settings.product_list | slice: 0, section.settings.products_to_show
+  assign displayed_product_count = displayed_products.size
+%}
+
 {% style %}
   .custom-featured-products--{{ section.id }} {
+    --custom-featured-products-page-margin: 16px;
     display: block;
     width: {{ section.settings.desktop_width_percent }}%;
     max-width: 100%;
@@ -8,9 +14,15 @@
   }
 
   .custom-featured-products--{{ section.id }} .custom-featured-products__container {
-    max-width: 1200px;
+    width: 100%;
+    max-width: min(var(--normal-page-width), calc(100% - (var(--custom-featured-products-page-margin) * 2)));
     margin: 0 auto;
-    padding: 0 20px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .custom-featured-products--{{ section.id }} {
+      --custom-featured-products-page-margin: 40px;
+    }
   }
 
   .custom-featured-products--{{ section.id }} .custom-featured-products__header {
@@ -24,7 +36,7 @@
     margin: 0 0 8px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .custom-featured-products--{{ section.id }} .custom-featured-products__title {
@@ -44,6 +56,16 @@
     grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));
     gap: {{ section.settings.grid_gap }}px;
     margin-top: {{ section.settings.grid_spacing }}px;
+  }
+
+  .custom-featured-products--{{ section.id }} .custom-featured-products__grid.custom-featured-products__grid--center-three {
+    grid-template-columns: repeat(3, minmax(0, calc((100% - ({{ section.settings.grid_gap }}px * 3)) / 4)));
+    justify-content: center;
+  }
+
+  .custom-featured-products--{{ section.id }} .custom-featured-products__grid.custom-featured-products__grid--center-two {
+    grid-template-columns: repeat(2, minmax(0, calc((100% - ({{ section.settings.grid_gap }}px * 2)) / 4)));
+    justify-content: center;
   }
 
   .custom-featured-products--{{ section.id }} .custom-featured-products__card {
@@ -130,11 +152,17 @@
   }
 
   .custom-featured-products--{{ section.id }} .custom-featured-products__vendor {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
     font-size: 12px;
     color: {{ section.settings.vendor_color }};
-    margin-bottom: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 6px 10px;
+    border-radius: 999px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    z-index: 1;
   }
 
   .custom-featured-products--{{ section.id }} .custom-featured-products__price-wrapper {
@@ -167,6 +195,30 @@
   .custom-featured-products--{{ section.id }} .custom-featured-products__empty-state p {
     font-size: 16px;
     margin: 0;
+  }
+
+  .custom-featured-products--{{ section.id }} .custom-featured-products__footer {
+    margin-top: {{ section.settings.button_spacing }}px;
+    text-align: {{ section.settings.button_alignment }};
+  }
+
+  .custom-featured-products--{{ section.id }} .custom-featured-products__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: {{ section.settings.button_text_size }}px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .custom-featured-products--{{ section.id }} .custom-featured-products__button:hover {
+    background-color: {{ section.settings.button_hover_background }};
+    color: {{ section.settings.button_hover_text_color }};
   }
 
   @media screen and (max-width: 989px) {
@@ -210,7 +262,7 @@
       </div>
     {% endif %}
 
-    <div class="custom-featured-products__grid">
+    <div class="custom-featured-products__grid{% if section.settings.columns_desktop == 4 and displayed_product_count == 3 %} custom-featured-products__grid--center-three{% elsif section.settings.columns_desktop == 4 and displayed_product_count == 2 %} custom-featured-products__grid--center-two{% endif %}">
       {% if section.settings.product_list != blank %}
         {% for product in section.settings.product_list limit: section.settings.products_to_show %}
           <div class="custom-featured-products__card">
@@ -231,6 +283,10 @@
                   </div>
                 {% endif %}
 
+                {% if section.settings.show_vendor and product.vendor != blank %}
+                  <div class="custom-featured-products__vendor">{{ product.vendor }}</div>
+                {% endif %}
+
                 {% if section.settings.show_badges %}
                   {% if product.compare_at_price > product.price %}
                     <div class="custom-featured-products__badge">Sale</div>
@@ -241,10 +297,6 @@
               </div>
 
               <div class="custom-featured-products__info">
-                {% if section.settings.show_vendor and product.vendor != blank %}
-                  <div class="custom-featured-products__vendor">{{ product.vendor }}</div>
-                {% endif %}
-
                 <h3 class="custom-featured-products__product-title">{{ product.title }}</h3>
 
                 {% if section.settings.show_price %}
@@ -265,6 +317,14 @@
         </div>
       {% endif %}
     </div>
+
+    {% if section.settings.button_text != blank and section.settings.button_link != blank %}
+      <div class="custom-featured-products__footer">
+        <a href="{{ section.settings.button_link }}" class="custom-featured-products__button">
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {% endif %}
   </div>
 </custom-featured-products>
 
@@ -331,7 +391,7 @@
       "id": "products_to_show",
       "label": "Products to show",
       "min": 2,
-      "max": 12,
+      "max": 4,
       "step": 1,
       "default": 4
     },
@@ -393,7 +453,7 @@
       "id": "section_padding",
       "label": "Section padding",
       "min": 0,
-      "max": 100,
+      "max": 120,
       "step": 5,
       "unit": "px",
       "default": 40
@@ -525,7 +585,7 @@
       "type": "checkbox",
       "id": "show_vendor",
       "label": "Show vendor",
-      "default": false
+      "default": true
     },
     {
       "type": "checkbox",
@@ -614,6 +674,86 @@
       "step": 2,
       "unit": "px",
       "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Bottom button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View all"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_alignment",
+      "label": "Button alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "button_spacing",
+      "label": "Button spacing",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Button text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 14
     }
   ],
   "presets": [
