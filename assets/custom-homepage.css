@@ -1,0 +1,42 @@
+.custom-hover-zoom {
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.custom-hover-zoom:hover {
+  transform: scale(1.04);
+}
+
+.custom-scroll-trigger {
+  opacity: 0;
+  transition-duration: 0.7s;
+  transition-timing-function: ease;
+  transition-property: opacity, transform;
+  transition-delay: var(--custom-animation-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.custom-scroll-trigger.custom-fade-in-up {
+  transform: translate3d(0, 32px, 0);
+}
+
+.custom-scroll-trigger.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-hover-zoom,
+  .custom-scroll-trigger {
+    transition: none;
+  }
+
+  .custom-hover-zoom:hover,
+  .custom-scroll-trigger,
+  .custom-scroll-trigger.custom-fade-in-up,
+  .custom-scroll-trigger.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}

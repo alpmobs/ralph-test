@@ -124,7 +124,11 @@
   {% if benefit_count > 0 %}
     <div class="custom-benefits__container">
       {% for block in section.blocks %}
-        <div class="custom-benefits__item" {{ block.shopify_attributes }}>
+        <div
+          class="custom-benefits__item custom-scroll-trigger custom-fade-in-up"
+          style="--custom-animation-delay: {{ forloop.index0 | times: 120 }}ms;"
+          {{ block.shopify_attributes }}
+        >
           {% if block.settings.image != blank %}
             <div class="custom-benefits__icon">
               <img

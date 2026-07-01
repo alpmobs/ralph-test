@@ -1,5 +1,6 @@
 {% style %}
   .custom-footer--{{ section.id }} {
+    --custom-footer-page-margin: 16px;
     display: block;
     width: {{ section.settings.desktop_width_percent }}%;
     max-width: 100%;
@@ -15,7 +16,8 @@
     display: grid;
     grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));
     gap: {{ section.settings.column_gap }}px;
-    max-width: 1200px;
+    width: 100%;
+    max-width: min(var(--normal-page-width), calc(100% - (var(--custom-footer-page-margin) * 2)));
     margin: 0 auto;
   }
 
@@ -138,7 +140,8 @@
   }
 
   .custom-footer--{{ section.id }} .custom-footer__copyright-wrapper {
-    max-width: 1200px;
+    width: 100%;
+    max-width: min(var(--normal-page-width), calc(100% - (var(--custom-footer-page-margin) * 2)));
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -152,11 +155,6 @@
     align-items: center;
   }
 
-  .custom-footer--{{ section.id }} .custom-footer__copyright-row--single {
-    display: flex;
-    justify-content: {{ section.settings.copyright_alignment }};
-  }
-
   .custom-footer--{{ section.id }} .custom-footer__copyright-col-left {
     display: flex;
     justify-content: flex-start;
@@ -167,10 +165,51 @@
     justify-content: flex-end;
   }
 
+  .custom-footer--{{ section.id }} .custom-footer__copyright-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+
+  .custom-footer--{{ section.id }} .custom-footer__copyright-link,
+  .custom-footer--{{ section.id }} .custom-footer__copyright-links a {
+    color: {{ section.settings.copyright_text_color }};
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .custom-footer--{{ section.id }} .custom-footer__copyright-link:hover,
+  .custom-footer--{{ section.id }} .custom-footer__copyright-links a:hover {
+    color: {{ section.settings.link_hover_color }};
+  }
+
   .custom-footer--{{ section.id }} .custom-footer__copyright-text {
     font-size: {{ section.settings.copyright_text_size }}px;
     color: {{ section.settings.copyright_text_color }};
     margin: 0;
+  }
+
+  .custom-footer--{{ section.id }} .custom-footer__payment-row {
+    display: flex;
+    justify-content: center;
+  }
+
+  .custom-footer--{{ section.id }} .custom-footer__payment-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .custom-footer--{{ section.id }} .custom-footer__payment-item {
+    display: flex;
+    align-items: center;
   }
 
   @media screen and (max-width: 749px) {
@@ -194,6 +233,12 @@
     .custom-footer--{{ section.id }} .custom-footer__copyright-col-left,
     .custom-footer--{{ section.id }} .custom-footer__copyright-col-right {
       justify-content: center;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .custom-footer--{{ section.id }} {
+      --custom-footer-page-margin: 40px;
     }
   }
 {% endstyle %}
@@ -335,29 +380,41 @@
   {% if section.settings.show_copyright %}
     <div class="custom-footer__copyright">
       <div class="custom-footer__copyright-wrapper">
-        {% if section.settings.copyright_row_1_text != blank %}
-          <div class="custom-footer__copyright-row custom-footer__copyright-row--single">
-            <p class="custom-footer__copyright-text">{{ section.settings.copyright_row_1_text }}</p>
-          </div>
-        {% endif %}
-        {% if section.settings.copyright_row_2_left_text != blank or section.settings.copyright_row_2_right_text != blank %}
+        {% if section.settings.copyright_row_1_text != blank or shop.privacy_policy != blank or shop.terms_of_service != blank %}
           <div class="custom-footer__copyright-row">
             <div class="custom-footer__copyright-col-left">
-              {% if section.settings.copyright_row_2_left_text != blank %}
-                <p class="custom-footer__copyright-text">{{ section.settings.copyright_row_2_left_text }}</p>
+              {% if section.settings.copyright_row_1_text != blank %}
+                <p class="custom-footer__copyright-text">{{ section.settings.copyright_row_1_text }}</p>
               {% endif %}
             </div>
             <div class="custom-footer__copyright-col-right">
-              {% if section.settings.copyright_row_2_right_text != blank %}
-                <p class="custom-footer__copyright-text">{{ section.settings.copyright_row_2_right_text }}</p>
-              {% endif %}
+              <div class="custom-footer__copyright-links">
+                <span class="custom-footer__copyright-text">{{ powered_by_link }}</span>
+                {% if shop.privacy_policy != blank %}
+                  <a href="{{ shop.privacy_policy.url }}" class="custom-footer__copyright-link">Privacy Policy</a>
+                {% endif %}
+                {% if shop.terms_of_service != blank %}
+                  <a href="{{ shop.terms_of_service.url }}" class="custom-footer__copyright-link">Terms</a>
+                {% endif %}
+              </div>
             </div>
+          </div>
+        {% endif %}
+        {% if shop.enabled_payment_types.size > 0 %}
+          <div class="custom-footer__payment-row">
+            <ul class="custom-footer__payment-list" role="list">
+              {% for type in shop.enabled_payment_types %}
+                <li class="custom-footer__payment-item">
+                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                </li>
+              {% endfor %}
+            </ul>
           </div>
         {% endif %}
       </div>
     </div>
   {% endif %}
-</div>
+ </div>
 
 {% schema %}
 {
@@ -733,19 +790,19 @@
     {
       "type": "text",
       "id": "copyright_row_1_text",
-      "label": "Row 1 text",
+      "label": "Copyright text",
       "default": "© 2026 Your Store Name. All rights reserved."
     },
     {
       "type": "text",
       "id": "copyright_row_2_left_text",
-      "label": "Row 2 left text",
+      "label": "Legacy left text",
       "default": "Privacy Policy"
     },
     {
       "type": "text",
       "id": "copyright_row_2_right_text",
-      "label": "Row 2 right text",
+      "label": "Legacy right text",
       "default": "Powered by Shopify"
     },
     {

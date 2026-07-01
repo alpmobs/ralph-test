@@ -15,36 +15,44 @@
         "slide_79BteR": {
           "type": "slide",
           "settings": {
-            "image_desktop": "shopify://shop_images/pexels-pixel-krd-10352379.jpg",
+            "image_desktop": "shopify://shop_images/pexels-pixel-krd-10352379.webp",
+            "content_position": "center",
+            "text_alignment": "left",
             "subheading": "Certified Enterprise Server Parts",
             "title": "Don't Play Roulette With Your Data",
             "description": "We're the final clean link between enterprise decommissioning and your business. Every drive is rigorously tested, securely packaged, and backed by real support.",
             "button_text": "Shop Certified Drives",
             "button_link": "shopify://collections/all",
             "button_2_text": "Learn more",
-            "button_2_link": ""
+            "button_2_link": "shopify://products/test-3"
           }
         },
         "slide_4NyUhT": {
           "type": "slide",
           "settings": {
-            "subheading": "New Collection",
-            "title": "Discover Your Style",
-            "description": "Explore our latest collection of premium products",
-            "button_text": "Shop now",
-            "button_link": "",
+            "image_desktop": "shopify://shop_images/pexels-sejio402-6429123.webp",
+            "content_position": "top-right",
+            "text_alignment": "right",
+            "subheading": "Premium Parts. Honest Prices.",
+            "title": "Enterprise-Grade Hardware Without the Enterprise Price Tag",
+            "description": "Get the same high-performing server components trusted by Fortune 500 companies — fully tested, refurbished, and ready to deploy at a fraction of the cost.",
+            "button_text": "Browse Deals Now",
+            "button_link": "shopify://collections/sale",
             "button_2_text": "Learn more",
             "button_2_link": ""
           }
         },
-        "slide_A8ainK": {
+        "slide_UeTiNw": {
           "type": "slide",
           "settings": {
-            "subheading": "New Collection",
-            "title": "Discover Your Style",
-            "description": "Explore our latest collection of premium products",
-            "button_text": "Shop now",
-            "button_link": "",
+            "image_desktop": "shopify://shop_images/pexels-sejio402-6429164.webp",
+            "content_position": "bottom-center",
+            "text_alignment": "center",
+            "subheading": "Limited Inventory Available",
+            "title": "Your Next Server Build Starts Here",
+            "description": "We carry decommissioned drives, RAM, CPUs, and more from top-tier data centers. Stock moves fast — find your parts before they're gone.",
+            "button_text": "See What's In Stock",
+            "button_link": "shopify://collections/all",
             "button_2_text": "Learn more",
             "button_2_link": ""
           }
@@ -53,15 +61,17 @@
       "block_order": [
         "slide_79BteR",
         "slide_4NyUhT",
-        "slide_A8ainK"
+        "slide_UeTiNw"
       ],
       "name": "Custom homepage hero",
       "settings": {
         "slide_height_desktop": 600,
         "slide_height_mobile": 400,
-        "content_position": "bottom-left",
-        "text_alignment": "left",
+        "content_position": "center",
+        "text_alignment": "center",
         "content_max_width": 800,
+        "content_padding_top": 120,
+        "content_padding_bottom": 120,
         "overlay_color": "#000000",
         "overlay_opacity": 0.3,
         "text_color": "#ffffff",
@@ -99,7 +109,7 @@
         "benefit_tbtg9e": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/shield-check.svg",
+            "image": "shopify://shop_images/circle-heat-svgrepo-com.svg",
             "text": "Industry-Leading Packaging",
             "description": "Designed for high-value I.T. Arrives safe, every time"
           }
@@ -148,9 +158,9 @@
       "type": "custom-homepage-featured-products",
       "name": "Custom featured products",
       "settings": {
-        "subheading": "Shop now",
+        "subheading": "Hand-Picked & Certified",
         "heading": "Featured products",
-        "description": "<p>Discover our handpicked selection of premium products</p>",
+        "description": "<p>Shop our most trusted server components — tested, sanitized, and ready to deploy.</p>",
         "product_list": [
           "product-1",
           "test-3",
@@ -192,7 +202,7 @@
         "badge_text_color": "#ffffff",
         "badge_border_radius": 4,
         "button_text": "View all",
-        "button_link": "",
+        "button_link": "shopify://collections/all",
         "button_alignment": "center",
         "button_spacing": 30,
         "button_text_size": 14,
@@ -209,34 +219,38 @@
         "manual_card_TM8iVV": {
           "type": "manual_card",
           "settings": {
-            "title": "Collection title",
-            "description": "<p>Add a short collection description here.</p>",
-            "button_text": "Explore collection",
-            "link": ""
+            "badge_label": "Storage Solutions",
+            "title": "Hard Drives & SSDs",
+            "description": "<p>From high-capacity SAS drives to blazing-fast SSDs — all enterprise-pulled, tested, and ready to ship.</p>",
+            "button_text": "Shop Storage",
+            "link": "shopify://collections/sale"
           }
         },
         "manual_card_MJAHbU": {
           "type": "manual_card",
           "settings": {
             "image": "shopify://shop_images/album-sale.webp",
-            "title": "Sale",
-            "description": "<p>Add a short collection description here.</p>",
-            "button_text": "Explore collection",
+            "badge_label": "Memory & RAM",
+            "title": "RAM & ECC DIMMs",
+            "description": "<p>Upgrade your server's performance with certified DDR4 ECC memory compatible with all major enterprise platforms.</p>",
+            "button_text": "Shop Memory",
             "link": "shopify://collections/sale"
           }
         },
         "manual_card_4VmFNM": {
           "type": "manual_card",
           "settings": {
-            "title": "Collection title",
-            "description": "<p>Add a short collection description here.</p>",
-            "button_text": "Explore collection",
-            "link": ""
+            "badge_label": "Processing Power",
+            "title": "CPUs & Server Processors",
+            "description": "<p>Xeon-grade processors recovered from decommissioned data centers — benchmarked, verified, and priced to fit your budget.</p>",
+            "button_text": "Shop Processors",
+            "link": "shopify://collections/all"
           }
         },
         "manual_card_iMezGw": {
           "type": "manual_card",
           "settings": {
+            "badge_label": "",
             "title": "Collection title",
             "description": "<p>Add a short collection description here.</p>",
             "button_text": "Explore collection",
@@ -255,14 +269,14 @@
         "collections": [],
         "layout_mode": "slider",
         "show_arrows": true,
-        "heading": "Shop by collection",
-        "subheading": "test",
-        "description": "<p>hahaha</p>",
+        "heading": "Shop by Collection",
+        "subheading": "Find What You Need Fast",
+        "description": "<p>Browse our curated categories of certified server parts — built to help you find the right component quickly.</p>",
         "heading_alignment": "center",
         "heading_size": 32,
-        "subheading_size": 18,
+        "subheading_size": 14,
         "description_size": 16,
-        "heading_spacing": 75,
+        "heading_spacing": 40,
         "heading_color": "#000000",
         "subheading_color": "#666666",
         "description_color": "#666666",
@@ -270,7 +284,7 @@
         "columns_mobile": "1",
         "grid_gap": 20,
         "desktop_width_percent": 100,
-        "section_padding": 40,
+        "section_padding": 120,
         "container_background_color": "#ebebeb",
         "image_aspect_ratio": 100,
         "card_border_radius": 8,
@@ -280,11 +294,16 @@
         "show_card_description": true,
         "card_description_words": 18,
         "card_title_size": 18,
-        "card_title_color": "#000000",
+        "card_title_color": "{{ settings.color_palette.background }}",
         "card_description_size": 14,
-        "card_description_color": "#666666",
+        "card_description_color": "{{ settings.color_palette.background }}",
         "show_card_button": true,
         "collection_button_text": "View",
+        "collection_badge_label": "",
+        "badge_text_size": 12,
+        "badge_background": "#ffffff",
+        "badge_text_color": "#000000",
+        "badge_border_radius": 20,
         "show_product_count": true,
         "card_count_size": 12,
         "count_background": "#ffffff",
@@ -382,8 +401,8 @@
         "title_alignment": "center",
         "title_spacing": 40,
         "section_padding": 40,
-        "background_color": "#34E897",
-        "container_background_color": "#EBEBEB",
+        "background_color": "{{ settings.color_palette.background }}",
+        "container_background_color": "#ebebeb",
         "desktop_width_percent": 100,
         "card_spacing": 20,
         "show_nav_buttons": false,

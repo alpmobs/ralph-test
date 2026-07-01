@@ -249,7 +249,7 @@
 <custom-featured-products class="custom-featured-products custom-featured-products--{{ section.id }}">
   <div class="custom-featured-products__container">
     {% if section.settings.subheading != blank or section.settings.heading != blank or section.settings.description != blank %}
-      <div class="custom-featured-products__header">
+      <div class="custom-featured-products__header custom-scroll-trigger custom-fade-in-up">
         {% if section.settings.subheading != blank %}
           <div class="custom-featured-products__subheading">{{ section.settings.subheading }}</div>
         {% endif %}
@@ -265,7 +265,10 @@
     <div class="custom-featured-products__grid{% if section.settings.columns_desktop == 4 and displayed_product_count == 3 %} custom-featured-products__grid--center-three{% elsif section.settings.columns_desktop == 4 and displayed_product_count == 2 %} custom-featured-products__grid--center-two{% endif %}">
       {% if section.settings.product_list != blank %}
         {% for product in section.settings.product_list limit: section.settings.products_to_show %}
-          <div class="custom-featured-products__card">
+          <div
+            class="custom-featured-products__card custom-scroll-trigger custom-fade-in-up"
+            style="--custom-animation-delay: {{ forloop.index0 | times: 120 }}ms;"
+          >
             <a href="{{ product.url }}" class="custom-featured-products__card-link">
               <div class="custom-featured-products__image-wrapper">
                 {% if product.featured_image %}

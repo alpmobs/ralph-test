@@ -72,7 +72,6 @@
 
   .custom-reviews--{{ section.id }} .custom-reviews__wrapper {
     position: relative;
-    margin-bottom: {{ section.settings.button_spacing }}px;
   }
 
   .custom-reviews--{{ section.id }} .custom-reviews__grid {
@@ -100,6 +99,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    transition: transform 0.45s ease, box-shadow 0.45s ease;
   }
 
   .custom-reviews--{{ section.id }} .custom-reviews__slider .custom-reviews__card {
@@ -260,6 +260,7 @@
   }
 
   .custom-reviews--{{ section.id }} .custom-reviews__button-wrapper {
+    margin-top: {{ section.settings.button_spacing }}px;
     text-align: {{ section.settings.button_alignment }};
   }
 
@@ -325,7 +326,7 @@
 >
   <div class="custom-reviews__container">
     {% if section.settings.subheading != blank or section.settings.section_title != blank or section.settings.description != blank %}
-      <div class="custom-reviews__header">
+      <div class="custom-reviews__header custom-scroll-trigger custom-fade-in-up">
         {% if section.settings.subheading != blank %}
           <p class="custom-reviews__subheading">{{ section.settings.subheading }}</p>
         {% endif %}
@@ -350,7 +351,11 @@
         {% endif %}
 
         {% for block in section.blocks %}
-          <div class="custom-reviews__card" {{ block.shopify_attributes }}>
+          <div
+            class="custom-reviews__card custom-scroll-trigger custom-fade-in-up"
+            style="--custom-animation-delay: {{ forloop.index0 | times: 120 }}ms;"
+            {{ block.shopify_attributes }}
+          >
             <div class="custom-reviews__reviewer">
               {% if block.settings.reviewer_image != blank %}
                 <img
@@ -439,7 +444,7 @@
       </div>
 
       {% if section.settings.button_text != blank and section.settings.button_link != blank %}
-        <div class="custom-reviews__button-wrapper">
+        <div class="custom-reviews__button-wrapper custom-scroll-trigger custom-fade-in-up" style="--custom-animation-delay: 180ms;">
           <a href="{{ section.settings.button_link }}" class="custom-reviews__button">
             {{ section.settings.button_text }}
           </a>
@@ -735,7 +740,7 @@
       "id": "section_padding",
       "label": "Section padding",
       "min": 0,
-      "max": 100,
+      "max": 120,
       "step": 5,
       "unit": "px",
       "default": 40

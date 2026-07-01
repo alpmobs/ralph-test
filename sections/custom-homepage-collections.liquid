@@ -3,11 +3,14 @@
   capture cards_markup
     for collection in section.settings.collections
       assign total_cards = total_cards | plus: 1
+      assign animation_delay = total_cards | minus: 1 | times: 120
       assign collection_description = collection.description | strip_html | strip
       if section.settings.card_description_words > 0
         assign collection_description = collection_description | truncatewords: section.settings.card_description_words
       endif
-      echo '<div class="custom-collections__card">'
+      echo '<div class="custom-collections__card custom-scroll-trigger custom-fade-in-up" style="--custom-animation-delay: '
+      echo animation_delay
+      echo 'ms;">'
         echo '<div class="custom-collections__image-wrapper">'
           if collection.featured_image != blank
             echo collection.featured_image | image_url: width: 800 | image_tag: class: 'custom-collections__image', loading: 'lazy', widths: '400, 600, 800', alt: collection.featured_image.alt
@@ -20,6 +23,12 @@
           endif
 
           echo '<div class="custom-collections__overlay"></div>'
+
+          if section.settings.collection_badge_label != blank
+            echo '<div class="custom-collections__badge">'
+            echo section.settings.collection_badge_label
+            echo '</div>'
+          endif
 
           if section.settings.show_product_count
             echo '<div class="custom-collections__product-count">'
@@ -58,7 +67,10 @@
 
     for block in section.blocks
       assign total_cards = total_cards | plus: 1
-      echo '<div class="custom-collections__card"'
+      assign animation_delay = total_cards | minus: 1 | times: 120
+      echo '<div class="custom-collections__card custom-scroll-trigger custom-fade-in-up" style="--custom-animation-delay: '
+      echo animation_delay
+      echo 'ms;" '
       echo block.shopify_attributes
       echo '>'
         echo '<div class="custom-collections__image-wrapper">'
@@ -70,6 +82,11 @@
             echo '</div>'
           endif
           echo '<div class="custom-collections__overlay"></div>'
+          if block.settings.badge_label != blank
+            echo '<div class="custom-collections__badge">'
+            echo block.settings.badge_label
+            echo '</div>'
+          endif
           echo '<div class="custom-collections__content">'
           if block.settings.title != blank
             echo '<h3 class="custom-collections__card-title">'
@@ -250,6 +267,20 @@
     z-index: 2;
   }
 
+  .custom-collections--{{ section.id }} .custom-collections__badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background-color: {{ section.settings.badge_background }};
+    color: {{ section.settings.badge_text_color }};
+    padding: 8px 16px;
+    border-radius: {{ section.settings.badge_border_radius }}px;
+    font-size: {{ section.settings.badge_text_size }}px;
+    font-weight: 600;
+    line-height: 1;
+    z-index: 2;
+  }
+
   .custom-collections--{{ section.id }} .custom-collections__content {
     position: absolute;
     left: 0;
@@ -398,7 +429,7 @@
 >
   <div class="custom-collections__container">
     {% if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank %}
-      <div class="custom-collections__header">
+      <div class="custom-collections__header custom-scroll-trigger custom-fade-in-up">
         {% if section.settings.subheading != blank %}
           <div class="custom-collections__subheading">{{ section.settings.subheading }}</div>
         {% endif %}
@@ -708,7 +739,7 @@
       "id": "section_padding",
       "label": "Section padding",
       "min": 0,
-      "max": 100,
+      "max": 120,
       "step": 5,
       "unit": "px",
       "default": 40
@@ -834,6 +865,43 @@
     {
       "type": "header",
       "content": "Product count"
+    },
+    {
+      "type": "text",
+      "id": "collection_badge_label",
+      "label": "Selected collection badge label"
+    },
+    {
+      "type": "range",
+      "id": "badge_text_size",
+      "label": "Badge text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "badge_border_radius",
+      "label": "Badge border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
     },
     {
       "type": "checkbox",
@@ -998,6 +1066,11 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "badge_label",
+          "label": "Badge label"
         },
         {
           "type": "text",
