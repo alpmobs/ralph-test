@@ -3,6 +3,8 @@
   assign displayed_product_count = displayed_products.size
 %}
 
+{% render 'quick-add-styles' %}
+
 {% style %}
   .custom-featured-products--{{ section.id }} {
     --custom-featured-products-page-margin: 16px;
@@ -68,6 +70,10 @@
     justify-content: center;
   }
 
+  .custom-featured-products--{{ section.id }} .custom-featured-products__grid.custom-featured-products__grid--single-row-four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .custom-featured-products--{{ section.id }} .custom-featured-products__card {
     display: flex;
     flex-direction: column;
@@ -86,12 +92,25 @@
   .custom-featured-products--{{ section.id }} .custom-featured-products__card-link {
     text-decoration: none;
     color: inherit;
+    display: block;
+  }
+
+  .custom-featured-products--{{ section.id }} .custom-featured-products__image-link {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .custom-featured-products--{{ section.id }} .custom-featured-products__info-link {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
 
   .custom-featured-products--{{ section.id }} .custom-featured-products__image-wrapper {
+    --padding-inline-end: 0px;
+    --padding-block-end: 0px;
+    --border-radius: {{ section.settings.card_border_radius }}px;
     position: relative;
     width: 100%;
     padding-bottom: 100%;
@@ -105,6 +124,19 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+
+  .custom-featured-products--{{ section.id }} .custom-featured-products__image--secondary {
+    opacity: 0;
+  }
+
+  .custom-featured-products--{{ section.id }} .custom-featured-products__card:hover .custom-featured-products__image--primary.has-secondary {
+    opacity: 0;
+  }
+
+  .custom-featured-products--{{ section.id }} .custom-featured-products__card:hover .custom-featured-products__image--secondary {
+    opacity: 1;
   }
 
   .custom-featured-products--{{ section.id }} .custom-featured-products__image-placeholder {
@@ -165,6 +197,31 @@
     z-index: 1;
   }
 
+  .custom-featured-products--{{ section.id }} .quick-add {
+    --quick-add-display: flex;
+    --quick-add-mobile-display: flex;
+    --quick-add-mobile-opacity: 1;
+    z-index: 3;
+  }
+
+  .custom-featured-products--{{ section.id }} .quick-add__button {
+    position: absolute;
+    right: var(--quick-add-offset, var(--padding-sm));
+    bottom: var(--quick-add-offset, var(--padding-sm));
+    opacity: 1;
+  }
+
+  @media screen and (min-width: 750px) {
+    .custom-featured-products--{{ section.id }} .quick-add__button {
+      opacity: 0;
+    }
+
+    .custom-featured-products--{{ section.id }} .custom-featured-products__card:hover .quick-add__button,
+    .custom-featured-products--{{ section.id }} .custom-featured-products__card:focus-within .quick-add__button {
+      opacity: 1;
+    }
+  }
+
   .custom-featured-products--{{ section.id }} .custom-featured-products__price-wrapper {
     display: flex;
     align-items: center;
@@ -223,7 +280,7 @@
 
   @media screen and (max-width: 989px) {
     .custom-featured-products--{{ section.id }} .custom-featured-products__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat({{ section.settings.columns_tablet }}, minmax(0, 1fr));
     }
   }
 
@@ -262,24 +319,35 @@
       </div>
     {% endif %}
 
-    <div class="custom-featured-products__grid{% if section.settings.columns_desktop == 4 and displayed_product_count == 3 %} custom-featured-products__grid--center-three{% elsif section.settings.columns_desktop == 4 and displayed_product_count == 2 %} custom-featured-products__grid--center-two{% endif %}">
+    <div class="custom-featured-products__grid{% if displayed_product_count == 4 %} custom-featured-products__grid--single-row-four{% elsif section.settings.columns_desktop == 4 and displayed_product_count == 3 %} custom-featured-products__grid--center-three{% elsif section.settings.columns_desktop == 4 and displayed_product_count == 2 %} custom-featured-products__grid--center-two{% endif %}">
       {% if section.settings.product_list != blank %}
         {% for product in section.settings.product_list limit: section.settings.products_to_show %}
           <div
             class="custom-featured-products__card custom-scroll-trigger custom-fade-in-up"
             style="--custom-animation-delay: {{ forloop.index0 | times: 120 }}ms;"
           >
-            <a href="{{ product.url }}" class="custom-featured-products__card-link">
-              <div class="custom-featured-products__image-wrapper">
+            <div class="custom-featured-products__image-wrapper card-gallery">
+              <a href="{{ product.url }}" class="custom-featured-products__card-link custom-featured-products__image-link" aria-label="{{ product.title | escape }}">
                 {% if product.featured_image %}
+                  {% assign secondary_image = product.images[1] %}
                   <img
                     src="{{ product.featured_image | image_url: width: 600 }}"
                     alt="{{ product.featured_image.alt | escape }}"
-                    class="custom-featured-products__image"
+                    class="custom-featured-products__image custom-featured-products__image--primary{% if section.settings.show_second_image_on_hover and secondary_image != blank %} has-secondary{% endif %}"
                     loading="lazy"
                     width="600"
                     height="600"
                   >
+                  {% if section.settings.show_second_image_on_hover and secondary_image != blank %}
+                    <img
+                      src="{{ secondary_image | image_url: width: 600 }}"
+                      alt="{{ secondary_image.alt | default: product.title | escape }}"
+                      class="custom-featured-products__image custom-featured-products__image--secondary"
+                      loading="lazy"
+                      width="600"
+                      height="600"
+                    >
+                  {% endif %}
                 {% else %}
                   <div class="custom-featured-products__image-placeholder">
                     {{ 'product-1' | placeholder_svg_tag }}
@@ -297,9 +365,15 @@
                     <div class="custom-featured-products__badge">Sold out</div>
                   {% endif %}
                 {% endif %}
-              </div>
+              </a>
+
+              {% if section.settings.show_quick_add %}
+                {% render 'quick-add', product: product, section_id: section.id %}
+              {% endif %}
+            </div>
 
               <div class="custom-featured-products__info">
+                <a href="{{ product.url }}" class="custom-featured-products__card-link custom-featured-products__info-link">
                 <h3 class="custom-featured-products__product-title">{{ product.title }}</h3>
 
                 {% if section.settings.show_price %}
@@ -310,8 +384,8 @@
                     {% endif %}
                   </div>
                 {% endif %}
+                </a>
               </div>
-            </a>
           </div>
         {% endfor %}
       {% else %}
@@ -394,7 +468,7 @@
       "id": "products_to_show",
       "label": "Products to show",
       "min": 2,
-      "max": 4,
+      "max": 12,
       "step": 1,
       "default": 4
     },
@@ -417,9 +491,18 @@
       "id": "columns_desktop",
       "label": "Columns on desktop",
       "min": 2,
-      "max": 4,
+      "max": 6,
       "step": 1,
       "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "label": "Columns on tablet",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
     },
     {
       "type": "select",
@@ -601,6 +684,18 @@
       "id": "show_badges",
       "label": "Show badges",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "label": "Show add to cart button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_second_image_on_hover",
+      "label": "Show second image on hover",
+      "default": false
     },
     {
       "type": "range",

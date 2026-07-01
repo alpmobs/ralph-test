@@ -45,3 +45,50 @@ if (document.readyState === 'loading') {
 
 document.addEventListener('shopify:section:load', revealScrollTriggeredElements);
 document.addEventListener('shopify:section:reorder', revealScrollTriggeredElements);
+
+const getCustomScrollContainer = () => {
+  if (window.matchMedia('(min-width: 990px)').matches) {
+    return document.querySelector('.page-wrapper') ?? document.scrollingElement ?? document.documentElement;
+  }
+
+  return document.scrollingElement ?? document.documentElement;
+};
+
+const initializeScrollTopButton = () => {
+  const button = document.querySelector('[data-scroll-top-button]');
+  if (!(button instanceof HTMLButtonElement)) return;
+
+  const updateVisibility = () => {
+    const container = getCustomScrollContainer();
+    const scrollTop = container.scrollTop;
+    button.classList.toggle('is-visible', scrollTop > 400);
+  };
+
+  const bindScrollListener = () => {
+    const container = getCustomScrollContainer();
+
+    if (initializeScrollTopButton.currentContainer && initializeScrollTopButton.currentContainer !== container) {
+      initializeScrollTopButton.currentContainer.removeEventListener('scroll', updateVisibility);
+    }
+
+    if (initializeScrollTopButton.currentContainer !== container) {
+      container.addEventListener('scroll', updateVisibility, { passive: true });
+      initializeScrollTopButton.currentContainer = container;
+    }
+
+    updateVisibility();
+  };
+
+  button.addEventListener('click', () => {
+    getCustomScrollContainer().scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  bindScrollListener();
+  window.addEventListener('resize', bindScrollListener);
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeScrollTopButton);
+} else {
+  initializeScrollTopButton();
+}

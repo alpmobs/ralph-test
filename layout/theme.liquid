@@ -140,5 +140,12 @@
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
+
+    <button class="custom-scroll-top" type="button" aria-label="Scroll to top" data-scroll-top-button>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M12 19V5"></path>
+        <polyline points="5 12 12 5 19 12"></polyline>
+      </svg>
+    </button>
   </body>
 </html>
