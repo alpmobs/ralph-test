@@ -289,6 +289,14 @@
       grid-template-columns: repeat({{ section.settings.columns_mobile }}, minmax(0, 1fr));
     }
 
+    .custom-featured-products--{{ section.id }} .custom-featured-products__grid.custom-featured-products__grid--mobile-two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .custom-featured-products--{{ section.id }} .custom-featured-products__grid.custom-featured-products__grid--mobile-one {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
     .custom-featured-products--{{ section.id }} .custom-featured-products__subheading {
       font-size: {{ section.settings.subheading_size | times: 0.8 }}px;
     }
@@ -319,7 +327,7 @@
       </div>
     {% endif %}
 
-    <div class="custom-featured-products__grid{% if displayed_product_count == 4 %} custom-featured-products__grid--single-row-four{% elsif section.settings.columns_desktop == 4 and displayed_product_count == 3 %} custom-featured-products__grid--center-three{% elsif section.settings.columns_desktop == 4 and displayed_product_count == 2 %} custom-featured-products__grid--center-two{% endif %}">
+    <div class="custom-featured-products__grid{% if displayed_product_count == 4 %} custom-featured-products__grid--single-row-four custom-featured-products__grid--mobile-two{% elsif displayed_product_count == 1 %} custom-featured-products__grid--mobile-one{% elsif section.settings.columns_desktop == 4 and displayed_product_count == 3 %} custom-featured-products__grid--center-three{% elsif section.settings.columns_desktop == 4 and displayed_product_count == 2 %} custom-featured-products__grid--center-two{% endif %}">
       {% if section.settings.product_list != blank %}
         {% for product in section.settings.product_list limit: section.settings.products_to_show %}
           <div
